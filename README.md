@@ -17,6 +17,11 @@ optional legacy BasicSR dependency; the segmentation-only code was checked
 locally on Python 3.14.5. Dependency ranges are compatibility constraints,
 not a claim that every combination was tested.
 
+`opencv-python>=4.7,<6` is the supported dependency range, not a record of
+the version used for the original analyses. Use the original environment
+records when reporting the paper's historical software versions; this
+release does not establish that historical OpenCV version.
+
 ```bash
 python -m venv .venv
 # Activate the virtual environment using your operating system's command.
@@ -139,6 +144,12 @@ or paper citation metadata have been invented.
 ## Optional original-cohort and blind-review workflow
 
 Install `requirements-review.txt` for Excel review packages and VLM clients.
+The standalone [human scoring manual](docs/human_scoring_manual.md) describes
+the six dimensions, dimension-specific 0–4 anchors, blinding procedure,
+and unchanged PASS/REVIEW/FAIL rules. The supplied
+[frozen VLM scoring principles](docs/16_frozen_vlm_scoring_prompt.txt) are
+also available without generating a workbook. The manual identifies the
+sources of its general instructions and expanded scoring anchors.
 These cohort-specific scripts retain their original 877-image/88-case checks.
 Their roots also respect `SR_SFCM_ROOT`. Run them only after reviewing QC.
 
