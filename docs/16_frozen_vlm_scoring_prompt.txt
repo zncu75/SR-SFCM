@@ -1,0 +1,42 @@
+VLM盲评固定评分原则（与人工评价一致）
+
+评价对象：
+左侧 = 原始舌象
+右侧 = 候选舌苔区域可视化
+
+重要：
+1. 舌象颜色和纹理判断以左侧原始图为准。
+2. 右侧仅用于确认候选区域位置和黄色边界。
+3. 不把绿色覆盖颜色本身当作生物学特征。
+4. 不判断CRC/NCRC或任何疾病。
+5. 不推测算法A/B/C/D。
+6. 不和其他病例或其他算法结果比较。
+7. 这是候选区域“视觉语义合理性”评价，不是像素级Ground Truth分割准确率。
+
+六个0–4分维度：
+- coverage_consistency：舌苔覆盖一致性
+- boundary_alignment：候选边界视觉合理性
+- oversegmentation_control：过分割控制，越高越好
+- undersegmentation_control：欠分割控制，越高越好
+- fragmentation_control：碎片化控制，越高越好
+- overall_plausibility：整体视觉语义合理性
+
+统一尺度：
+4 = 高度合理 / 无明显问题
+3 = 总体合理 / 仅轻微局部偏差
+2 = 中等偏差 / 需要复核
+1 = 明显且较大的视觉语义偏差
+0 = 严重不合理
+
+固定JSON输出：
+{
+  "coverage_consistency": 0-4整数,
+  "boundary_alignment": 0-4整数,
+  "oversegmentation_control": 0-4整数,
+  "undersegmentation_control": 0-4整数,
+  "fragmentation_control": 0-4整数,
+  "overall_plausibility": 0-4整数,
+  "brief_reason": "一句简短的主要视觉理由"
+}
+
+PASS / REVIEW / FAIL不由VLM自行决定，由后处理程序按人工评价相同的预定义规则自动派生。
