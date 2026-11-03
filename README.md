@@ -127,8 +127,11 @@ ground-truth annotations or a diagnostic classifier.
 
 ## Release scope and provenance
 
-The root-level and `scripts/` source copies were byte-identical. This
-release includes one copy of steps 01–06, a portable SR runner adapted
+Before publication, duplicate copies in the supplied local research folder
+were compared and found byte-identical. That check referred to the local
+source folder, not the layout of this public repository. This repository
+contains one selected copy of each published script under `scripts/`,
+including steps 01–06, a portable SR runner adapted
 from step 07, and inference functions extracted verbatim from the corrected
 step 12. The original buggy step 10/12 implementations are excluded.
 The SR wrapper retains network and tiling settings, adds explicit input,
@@ -147,7 +150,7 @@ Install `requirements-review.txt` for Excel review packages and VLM clients.
 The standalone [human scoring manual](docs/human_scoring_manual.md) describes
 the six dimensions, dimension-specific 0–4 anchors, blinding procedure,
 and unchanged PASS/REVIEW/FAIL rules. The supplied
-[frozen VLM scoring principles](docs/16_frozen_vlm_scoring_prompt.txt) are
+[frozen VLM scoring principles](docs/16_frozen_vlm_scoring_principles.txt) are
 also available without generating a workbook. The manual identifies the
 sources of its general instructions and expanded scoring anchors.
 These cohort-specific scripts retain their original 877-image/88-case checks.
@@ -209,3 +212,32 @@ Checks cover genuine FCM updates, membership normalization, deterministic
 inference, ROI partitioning, and CLI output/error handling with synthetic
 images. Full original-cohort QC and GPU SR require the external data and
 runtime and are not established by these checks.
+
+
+## Scoring principles and exact VLM prompt
+
+The [Chinese scoring principles](docs/16_frozen_vlm_scoring_principles.txt)
+are a summary of the assessment framework, not the complete API prompt.
+The [full VLM prompt](docs/vlm_scoring_prompt_full.txt) is exported verbatim
+from the evaluated `SCORING_PROMPT` string in step 16, including its six
+sets of 0-4 anchors and JSON output instructions. It matches the embedded
+prompt in step 20. The scripts remain the runtime source; the exported text
+is provided for inspection and does not change historical scoring material.
+The former summary filename `16_frozen_vlm_scoring_prompt.txt` has been
+replaced with `16_frozen_vlm_scoring_principles.txt` to distinguish these roles.
+
+## License and external dependencies
+
+The project-owned source code and documentation are available under the
+[MIT License](LICENSE), authorized by the project owner. External libraries,
+services, datasets and pretrained weights retain their own terms; see
+[external dependency notices](THIRD_PARTY_NOTICES.md). No pretrained weights
+or patient images are included or relicensed by this repository.
+
+## Fixed version for reference
+
+Use the [v1.0.0 source tag](https://github.com/zncu75/SR-SFCM/tree/v1.0.0)
+when referring to this code release, rather than the moving `main` branch.
+The tag identifies this public code and documentation snapshot; it does not
+establish the historical analysis environment or full-cohort reproducibility.
+For an immutable reference, also record the commit identified by that tag.

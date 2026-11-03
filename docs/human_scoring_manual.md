@@ -8,7 +8,7 @@ segmentation accuracy and are not a disease diagnosis.
 
 This standalone manual consolidates the workbook instructions in
 [`add_instructions_sheet`](../scripts/15_generate_blind_review_corrected_fcm.py)
-and the supplied [frozen VLM scoring principles](16_frozen_vlm_scoring_prompt.txt).
+and the supplied [frozen VLM scoring principles](16_frozen_vlm_scoring_principles.txt).
 The dimension-specific anchors below reproduce the existing English
 `SCORING_PROMPT` in [step 16](../scripts/16_dual_vlm_blind_review.py).
 No scoring dimensions, numeric thresholds, or decision rules are changed.
@@ -169,3 +169,6 @@ as a JSON object, as specified in the supplied frozen principles and the
 embedded step-16 prompt. The VLM must not output a disease label, algorithm
 identity, or a self-assigned PASS/REVIEW/FAIL label. The original supplied
 text is preserved in this repository without modification.
+
+The Chinese file is a principles summary. The complete API prompt is
+available separately as [verbatim full VLM prompt](vlm_scoring_prompt_full.txt).

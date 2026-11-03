@@ -1,0 +1,97 @@
+You are independently evaluating the visual-semantic plausibility of an algorithmically generated
+candidate tongue-coating region.
+
+The image has TWO PANELS:
+- LEFT: the original tongue image.
+- RIGHT: the same tongue image with the candidate tongue-coating region highlighted by a
+  semi-transparent green overlay and a yellow boundary.
+
+IMPORTANT:
+1. Judge tongue color/texture primarily from the LEFT original image.
+2. Use the RIGHT panel only to identify the proposed candidate region and its boundary.
+3. Do NOT treat the green overlay color itself as a biological or diagnostic cue.
+4. Do NOT infer disease status.
+5. Do NOT guess which algorithm generated the candidate region.
+6. Do NOT compare this image with any other method or case.
+7. This is NOT expert pixel-level ground-truth segmentation accuracy. It is a blinded
+   visual-semantic plausibility assessment.
+
+Score EACH of the following six dimensions using an INTEGER from 0 to 4.
+
+GENERAL SCALE
+4 = highly plausible / no obvious visual-semantic problem
+3 = generally plausible / only minor local deviation
+2 = moderate mismatch / requires review
+1 = clear substantial mismatch
+0 = severe visual-semantic inconsistency / essentially unacceptable
+
+DIMENSION 1 — coverage_consistency
+Judge whether the candidate coating region broadly covers the visually apparent tongue-coating
+distribution in the original image.
+4: visually apparent coating distribution is covered very well overall.
+3: coverage is generally appropriate with only minor local omission or excess.
+2: moderate mismatch in coverage; a noticeable portion is omitted or unnecessarily included.
+1: large mismatch; substantial visually apparent coating is missed or the proposed coverage is
+   largely inconsistent with the original.
+0: the proposed coverage is severely inconsistent with the visually apparent coating distribution.
+
+DIMENSION 2 — boundary_alignment
+Judge whether the yellow candidate boundary broadly follows visually plausible transitions between
+coating-like and tongue-body-like appearance. Exact pixel-level agreement is NOT required.
+4: boundary location and overall course are highly plausible.
+3: boundary is generally plausible with only small local displacement.
+2: moderate boundary mismatch in several locations.
+1: large portions of the boundary are clearly misplaced.
+0: boundary is fundamentally inconsistent with the visible coating/body appearance.
+
+DIMENSION 3 — oversegmentation_control
+Judge whether the candidate coating region avoids including areas that are visually more consistent
+with tongue body rather than coating.
+Higher score = less visually apparent over-segmentation.
+4: essentially no obvious inappropriate inclusion.
+3: only small/local inappropriate inclusion.
+2: moderate amount of visually inappropriate inclusion.
+1: substantial tongue-body-like area is included.
+0: very extensive inappropriate inclusion; the candidate region is largely over-segmented.
+
+DIMENSION 4 — undersegmentation_control
+Judge whether visually apparent coating-like regions are retained by the candidate region.
+Higher score = less visually apparent under-segmentation.
+4: essentially all obvious coating-like regions are retained.
+3: only small/local omission.
+2: moderate omission of visually apparent coating.
+1: substantial obvious coating-like area is omitted.
+0: most visually apparent coating-like area is missed.
+
+DIMENSION 5 — fragmentation_control
+Judge spatial coherence: avoid implausible islands, holes, excessive local breaks, jagged
+fragmentation, or highly scattered pieces.
+Higher score = more spatially coherent and less fragmented.
+4: highly coherent; essentially no problematic fragmentation.
+3: generally coherent with only minor holes/islands/local breaks.
+2: noticeable fragmentation, but the main structure remains interpretable.
+1: strong fragmentation with many implausible holes/islands/breaks.
+0: extremely fragmented or spatially incoherent candidate region.
+
+DIMENSION 6 — overall_plausibility
+Considering the image as a whole, judge whether the proposed candidate tongue-body/tongue-coating
+partition is visually and semantically plausible.
+4: highly plausible overall.
+3: generally plausible overall with minor limitations.
+2: moderate overall concern; requires review.
+1: clearly implausible overall.
+0: severely implausible overall.
+
+Return ONLY one JSON object with EXACTLY these keys:
+{
+  "coverage_consistency": <0-4 integer>,
+  "boundary_alignment": <0-4 integer>,
+  "oversegmentation_control": <0-4 integer>,
+  "undersegmentation_control": <0-4 integer>,
+  "fragmentation_control": <0-4 integer>,
+  "overall_plausibility": <0-4 integer>,
+  "brief_reason": "<one short sentence explaining the main visual reason>"
+}
+
+Do not output markdown, code fences, PASS/FAIL labels, disease labels, algorithm names, or any
+additional keys.
