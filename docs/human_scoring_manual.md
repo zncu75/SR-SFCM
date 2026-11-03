@@ -46,7 +46,7 @@ For SR-gain packages, retain their generated item IDs and batch order rather
 than assuming the same number of items; the same six dimensions and decision
 rules apply.
 
-## General 0?4 scale
+## General 0-4 scale
 
 | Score | General meaning |
 | --- | --- |
@@ -61,7 +61,7 @@ cutoffs are introduced, and exact pixel-level boundary agreement is not required
 
 ## Dimension-specific anchors
 
-### `— coverage_consistency`
+### `coverage_consistency`
 
 Judge whether the candidate coating region broadly covers the visually apparent tongue-coating distribution in the original image.
 
@@ -73,7 +73,7 @@ Judge whether the candidate coating region broadly covers the visually apparent 
 | 1 | large mismatch; substantial visually apparent coating is missed or the proposed coverage is largely inconsistent with the original. |
 | 0 | the proposed coverage is severely inconsistent with the visually apparent coating distribution. |
 
-### `— boundary_alignment`
+### `boundary_alignment`
 
 Judge whether the yellow candidate boundary broadly follows visually plausible transitions between coating-like and tongue-body-like appearance. Exact pixel-level agreement is NOT required.
 
@@ -85,7 +85,7 @@ Judge whether the yellow candidate boundary broadly follows visually plausible t
 | 1 | large portions of the boundary are clearly misplaced. |
 | 0 | boundary is fundamentally inconsistent with the visible coating/body appearance. |
 
-### `— oversegmentation_control`
+### `oversegmentation_control`
 
 Judge whether the candidate coating region avoids including areas that are visually more consistent with tongue body rather than coating. Higher score = less visually apparent over-segmentation.
 
@@ -97,7 +97,7 @@ Judge whether the candidate coating region avoids including areas that are visua
 | 1 | substantial tongue-body-like area is included. |
 | 0 | very extensive inappropriate inclusion; the candidate region is largely over-segmented. |
 
-### `— undersegmentation_control`
+### `undersegmentation_control`
 
 Judge whether visually apparent coating-like regions are retained by the candidate region. Higher score = less visually apparent under-segmentation.
 
@@ -109,7 +109,7 @@ Judge whether visually apparent coating-like regions are retained by the candida
 | 1 | substantial obvious coating-like area is omitted. |
 | 0 | most visually apparent coating-like area is missed. |
 
-### `— fragmentation_control`
+### `fragmentation_control`
 
 Judge spatial coherence: avoid implausible islands, holes, excessive local breaks, jagged fragmentation, or highly scattered pieces. Higher score = more spatially coherent and less fragmented.
 
@@ -121,7 +121,7 @@ Judge spatial coherence: avoid implausible islands, holes, excessive local break
 | 1 | strong fragmentation with many implausible holes/islands/breaks. |
 | 0 | extremely fragmented or spatially incoherent candidate region. |
 
-### `— overall_plausibility`
+### `overall_plausibility`
 
 Considering the image as a whole, judge whether the proposed candidate tongue-body/tongue-coating partition is visually and semantically plausible.
 
@@ -138,7 +138,7 @@ Considering the image as a whole, judge whether the proposed candidate tongue-bo
 The **five core scores** are `coverage_consistency`, `boundary_alignment`,
 `oversegmentation_control`, `undersegmentation_control`, and
 `fragmentation_control`. `overall_plausibility` is the separate sixth score.
-Apply the following only after all six scores are valid integers in 0?4:
+Apply the following only after all six scores are valid integers in 0-4:
 
 | Decision | Unchanged rule |
 | --- | --- |
